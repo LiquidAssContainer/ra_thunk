@@ -1,12 +1,14 @@
 import { createStore, combineReducers } from 'redux';
 
 import { serviceListReducer } from '../reducers/serviceList';
-import { serviceFormReducer } from '../reducers/serviceForm';
 import { editModalReducer } from '../reducers/editModal';
+import { addServiceReducer } from '../reducers/addService';
+import { editServiceReducer } from '../reducers/editService';
 
 const reducer = combineReducers({
   serviceList: serviceListReducer,
-  serviceForm: serviceFormReducer,
+  addService: addServiceReducer,
+  editService: editServiceReducer,
   editModal: editModalReducer,
 });
 

@@ -1,5 +1,6 @@
 import { CHANGE_MODAL_STATE } from '../actions/actionTypes';
 
+// сейчас не используется
 export const editModalReducer = (
   state = { isOpen: false },
   { type, payload },

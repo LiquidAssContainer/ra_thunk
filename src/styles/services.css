@@ -84,3 +84,9 @@
   width: 70px;
   display: block;
 }
+
+.error-message {
+  padding: 10px;
+  background-color: #dd0000;
+  color: #fff;
+}

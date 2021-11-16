@@ -1,32 +1,46 @@
-import { nanoid } from 'nanoid';
-
 import {
   ADD_SERVICE,
   REMOVE_SERVICE,
   EDIT_SERVICE,
+  FETCH_SERVICES_REQUEST,
+  FETCH_SERVICES_FAILURE,
+  FETCH_SERVICES_SUCCESS,
 } from '../actions/actionTypes';
 
-import { services } from '../constants/dataBase';
-
 const initialState = {
-  services,
-  filtered: null,
+  services: [],
   loading: false,
   error: null,
 };
 
 export const serviceListReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case FETCH_SERVICES_REQUEST:
+      return { ...state, loading: true, error: null };
+
+    case FETCH_SERVICES_FAILURE:
+      const { error } = payload;
+      return { ...state, loading: false, error };
+
+    case FETCH_SERVICES_SUCCESS:
+      const { items } = payload;
+      return {
+        ...initialState,
+        services: items,
+      };
+
     case ADD_SERVICE: {
-      const { name, price } = payload;
+      console.log(payload);
+      const { id, name, price, content } = payload;
       return {
         ...state,
         services: [
           ...state.services,
-          { id: nanoid(), name, price: Number(price) },
+          { id, name, price: Number(price), content },
         ],
       };
     }
+
     case REMOVE_SERVICE: {
       const { id } = payload;
       return {
@@ -34,6 +48,7 @@ export const serviceListReducer = (state = initialState, { type, payload }) => {
         services: state.services.filter((service) => service.id !== id),
       };
     }
+
     case EDIT_SERVICE: {
       const { id, name, price } = payload;
       const serviceIndex = state.services.findIndex(

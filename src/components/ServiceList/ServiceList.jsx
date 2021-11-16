@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import {
   changeModalState,
+  fetchRemoveService,
   fillEditForm,
-  removeService,
 } from '../../actions/actionCreators';
 
 export const ServiceList = ({ services }) => {
@@ -21,7 +21,7 @@ const ServiceItem = ({ name, price, id }) => {
   const dispatch = useDispatch();
 
   const onRemove = () => {
-    dispatch(removeService(id));
+    fetchRemoveService(dispatch, id);
   };
 
   const onEdit = () => {
@@ -36,7 +36,7 @@ const ServiceItem = ({ name, price, id }) => {
         <div className="service-item_price">{price}</div>
       </div>
       <div className="service-item_controls">
-        <Link to="/services/add">
+        <Link to={`/services/${id}`}>
           <Button onClick={onEdit} label="Edit" />
         </Link>
         <Button onClick={onRemove} label="Remove" />
