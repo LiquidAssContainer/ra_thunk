@@ -2,7 +2,6 @@ import {
   ADD_SERVICE,
   REMOVE_SERVICE,
   EDIT_SERVICE,
-  FILTER_SERVICES,
   CHANGE_SERVICE_FIELD,
   RESET_FORM,
   CHANGE_MODAL_STATE,
@@ -19,10 +18,6 @@ export const removeService = (id) => {
 
 export const editService = (id, name, price) => {
   return { type: EDIT_SERVICE, payload: { id, name, price } };
-};
-
-export const filterServices = (string) => {
-  return { type: FILTER_SERVICES, payload: { string } };
 };
 
 export const changeServiceField = (formType, name, value) => {

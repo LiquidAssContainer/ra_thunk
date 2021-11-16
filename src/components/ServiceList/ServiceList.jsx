@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
   changeModalState,
@@ -35,7 +36,9 @@ const ServiceItem = ({ name, price, id }) => {
         <div className="service-item_price">{price}</div>
       </div>
       <div className="service-item_controls">
-        <Button onClick={onEdit} label="Edit" />
+        <Link to="/services/add">
+          <Button onClick={onEdit} label="Edit" />
+        </Link>
         <Button onClick={onRemove} label="Remove" />
       </div>
     </li>

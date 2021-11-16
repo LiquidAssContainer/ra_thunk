@@ -4,7 +4,6 @@ import {
   ADD_SERVICE,
   REMOVE_SERVICE,
   EDIT_SERVICE,
-  FILTER_SERVICES,
 } from '../actions/actionTypes';
 
 import { services } from '../constants/dataBase';
@@ -12,10 +11,8 @@ import { services } from '../constants/dataBase';
 const initialState = {
   services,
   filtered: null,
-};
-
-const filterByString = (string, services) => {
-  return services.filter((service) => service.name.toLowerCase().includes(string.toLowerCase()));
+  loading: false,
+  error: null,
 };
 
 export const serviceListReducer = (state = initialState, { type, payload }) => {
@@ -49,10 +46,6 @@ export const serviceListReducer = (state = initialState, { type, payload }) => {
         ...state,
         services: newServiceList,
       };
-    }
-    case FILTER_SERVICES: {
-      const { string } = payload;
-      return { ...state, filtered: filterByString(string, services) };
     }
 
     default:

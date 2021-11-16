@@ -8,11 +8,15 @@ const initialState = {
   add: {
     name: '',
     price: '',
+    loading: false,
+    error: null,
   },
   edit: {
     id: '',
     name: '',
     price: '',
+    loading: false,
+    error: null,
   },
 };
 

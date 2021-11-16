@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import { filterServices } from '../../actions/actionCreators';
+// import { filterServices } from '../../actions/actionCreators';
 
-export const FilterServices = () => {
-  const dispatch = useDispatch();
+export const FilterServices = ({ onFilter }) => {
+  // const dispatch = useDispatch();
 
   const [value, setValue] = useState('');
 
   const onChange = ({ target: { value } }) => {
     setValue(value);
-    dispatch(filterServices(value));
+    onFilter(value);
+    // dispatch(filterServices(value));
   };
 
   return (

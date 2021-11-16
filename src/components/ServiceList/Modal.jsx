@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { changeModalState } from '../../actions/actionCreators';
 
 export const Modal = ({ children, isOpen }) => {
@@ -12,9 +13,11 @@ export const Modal = ({ children, isOpen }) => {
     isOpen && (
       <div className="modal_wrapper">
         <div className="modal">
-          <button className="modal_close-btn" onClick={onClose}>
-            ×
-          </button>
+          <Link to="/services">
+            <button className="modal_close-btn" onClick={onClose}>
+              ×
+            </button>
+          </Link>
           {children}
         </div>
       </div>
