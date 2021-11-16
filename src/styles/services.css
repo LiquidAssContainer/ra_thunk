@@ -1,0 +1,86 @@
+.modal_wrapper {
+  position: absolute;
+  inset: 0;
+  background-color: #0005;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-color: #fff;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.modal_close-btn {
+  align-self: flex-end;
+  margin-bottom: 5px;
+}
+
+.services-app {
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.service-item_info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.service-item_name {
+  font-size: 20px;
+}
+
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.service-item:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.service-item_btn {
+  background-color: #fff;
+  border: 2px solid grey;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.service-item_controls {
+  display: flex;
+  gap: 5px;
+}
+
+.filter-services {
+  margin-bottom: 20px;
+}
+
+.filter-services_text {
+  margin-right: 10px;
+}
+
+.add-service_form {
+  margin-bottom: 10px;
+}
+
+.form_label {
+  display: block;
+}
+
+.form_label:not(:last-child) {
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.form_label_text {
+  width: 70px;
+  display: block;
+}
