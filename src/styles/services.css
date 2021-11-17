@@ -1,26 +1,6 @@
-.modal_wrapper {
-  position: absolute;
-  inset: 0;
-  background-color: #0005;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal {
-  background-color: #fff;
-  max-width: 700px;
+.services-app {
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  position: relative;
-}
-
-.modal_close-btn {
-  align-self: flex-end;
-  position: absolute;
-  right: 5px;
-  top: 5px;
 }
 
 .services-app {
@@ -29,10 +9,43 @@
   margin: 0 auto;
 }
 
+.add-service_link {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: auto;
+}
+
+.add-service_btn {
+  text-transform: uppercase;
+}
+
+.add-service_btn,
+.form_submit {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form_submit {
+  margin-top: 10px;
+  margin-inline: auto;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+}
+
 .service-item_info {
   display: flex;
-  gap: 20px;
   align-items: center;
+  gap: 20px;
 }
 
 .service-item_name {
@@ -53,6 +66,7 @@
   background-color: #fff;
   border: 2px solid grey;
   border-radius: 5px;
+
   cursor: pointer;
   text-transform: uppercase;
 }
@@ -71,7 +85,8 @@
 }
 
 .add-service_form {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form_label {
@@ -101,8 +116,10 @@
 .loading_wrapper {
   position: absolute;
   inset: 0;
-  background-color: rgb(255 255 255 / 76%);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: rgb(255 255 255 / 76%);
 }

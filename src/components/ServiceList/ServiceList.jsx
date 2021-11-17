@@ -31,7 +31,7 @@ const ServiceItem = ({ name, price, id }) => {
     <li className="service-item">
       <div className="service-item_info">
         <div className="service-item_name">{name}</div>
-        <div className="service-item_price">{price}</div>
+        <div className="service-item_price">{price} ₽</div>
       </div>
       <div className="service-item_controls">
         <Link to={`/services/${id}`}>

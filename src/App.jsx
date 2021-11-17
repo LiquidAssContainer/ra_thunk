@@ -55,7 +55,7 @@ export const App = () => {
         <ErrorPopup message={error} />
       ) : (
         <div className="services-app">
-          <Link to="/services/add">
+          <Link to="/services/add" className="add-service_link">
             <button className="add-service_btn">Add new service</button>
           </Link>
           <FilterServices onFilter={onFilter} />
