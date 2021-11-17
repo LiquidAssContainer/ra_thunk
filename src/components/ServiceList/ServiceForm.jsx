@@ -1,42 +1,48 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import {
   changeAddServiceField,
   changeEditServiceField,
-  changeModalState,
-  editService,
   fetchAddService,
-  resetEditForm,
+  fetchEditService,
 } from '../../actions/actionCreators';
+
 import { ErrorPopup } from './ErrorPopup';
 import { LoadingSpinner } from './LoadingSpinner';
 
 export const EditServiceForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { loading, error } = useSelector((state) => state.editService);
 
   const onInputChange = (name, value) => {
     dispatch(changeEditServiceField(name, value));
   };
 
-  const onFormSubmit = ({ id, name, price }) => {
-    if (name && price) {
-      dispatch(editService(id, name, price));
-      dispatch(changeModalState(false));
+  const onFormSubmit = ({ id, name, price, content }) => {
+    if (name && price && content) {
+      fetchEditService(dispatch, { id, name, price, content }, history);
     } else {
       console.log('Тут должна быть какая-нибудь модалка или попап');
     }
   };
 
-  return (
+  return error ? (
+    <ErrorPopup message={error} />
+  ) : (
     <ServiceForm
       type="edit"
       onInputChange={onInputChange}
       onFormSubmit={onFormSubmit}
+      isLoading={loading}
     />
   );
 };
 
 export const AddServiceForm = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const { loading, error } = useSelector((state) => state.addService);
@@ -47,27 +53,25 @@ export const AddServiceForm = () => {
 
   const onFormSubmit = ({ name, price, content }) => {
     if (name && price && content) {
-      fetchAddService(dispatch, { name, price, content });
-      dispatch(resetEditForm());
+      fetchAddService(dispatch, { name, price, content }, history);
     } else {
       console.log('Тут должна быть какая-нибудь модалка или попап');
     }
   };
 
-  return loading ? (
-    <LoadingSpinner radius="20" width="5" color="rgb(210, 70, 75)" />
-  ) : error ? (
+  return error ? (
     <ErrorPopup message={error} />
   ) : (
     <ServiceForm
       type="add"
       onInputChange={onInputChange}
       onFormSubmit={onFormSubmit}
+      isLoading={loading}
     />
   );
 };
 
-const ServiceForm = ({ type, onInputChange, onFormSubmit }) => {
+const ServiceForm = ({ type, onInputChange, onFormSubmit, isLoading }) => {
   const formData = useSelector((state) => state[`${type}Service`].service);
 
   const onSubmit = (e) => {
@@ -76,32 +80,39 @@ const ServiceForm = ({ type, onInputChange, onFormSubmit }) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="add-service_form">
-      <FormInput
-        label="Name"
-        name="name"
-        inputValue={formData.name}
-        onInputChange={onInputChange}
-        type="text"
-      />
-      <FormInput
-        label="Price"
-        name="price"
-        inputValue={formData.price}
-        onInputChange={onInputChange}
-        type="number"
-      />
-      <FormInput
-        label="Description"
-        name="content"
-        inputValue={formData.content}
-        onInputChange={onInputChange}
-        type="text"
-      />
-      <button type="submit" className="form_submit">
-        Save
-      </button>
-    </form>
+    <div className="form_container">
+      {isLoading && (
+        <div className="loading_wrapper">
+          <LoadingSpinner radius="20" width="5" color="rgb(210, 70, 75)" />
+        </div>
+      )}
+      <form onSubmit={onSubmit} className="add-service_form">
+        <FormInput
+          label="Name"
+          name="name"
+          inputValue={formData.name}
+          onInputChange={onInputChange}
+          type="text"
+        />
+        <FormInput
+          label="Price"
+          name="price"
+          inputValue={formData.price}
+          onInputChange={onInputChange}
+          type="number"
+        />
+        <FormInput
+          label="Description"
+          name="content"
+          inputValue={formData.content}
+          onInputChange={onInputChange}
+          type="text"
+        />
+        <button type="submit" className="form_submit">
+          Save
+        </button>
+      </form>
+    </div>
   );
 };
 

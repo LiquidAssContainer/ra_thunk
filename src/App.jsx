@@ -4,6 +4,8 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
+  Link,
+  Switch,
 } from 'react-router-dom';
 
 import {
@@ -53,16 +55,23 @@ export const App = () => {
         <ErrorPopup message={error} />
       ) : (
         <div className="services-app">
-          <AddServiceForm />
+          <Link to="/services/add">
+            <button className="add-service_btn">Add new service</button>
+          </Link>
           <FilterServices onFilter={onFilter} />
           <ServiceList services={filtered || services} />
-          {/* <Switch> */}
+          <Switch>
+            <Route path="/services/add">
+              <Modal isOpen>
+                <AddServiceForm />
+              </Modal>
+            </Route>
             <Route path="/services/:id">
               <Modal isOpen>
                 <EditServiceForm />
               </Modal>
             </Route>
-          {/* </Switch> */}
+          </Switch>
         </div>
       )}
     </Router>

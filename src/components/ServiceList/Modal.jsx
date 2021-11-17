@@ -1,18 +1,28 @@
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { changeModalState } from '../../actions/actionCreators';
+import { useHistory } from 'react-router';
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { resetEditForm } from '../../actions/actionCreators';
 
 export const Modal = ({ children, isOpen }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const ref = useRef();
 
   const onClose = () => {
-    dispatch(changeModalState(false));
+    // довольно костыльно диспатчить это в модалке в отрыве от самой формы
+    dispatch(resetEditForm());
+    history.push('/services');
   };
+
+  useOnClickOutside(ref, onClose);
 
   return (
     isOpen && (
       <div className="modal_wrapper">
-        <div className="modal">
+        <div className="modal" ref={ref}>
           <Link to="/services">
             <button className="modal_close-btn" onClick={onClose}>
               ×

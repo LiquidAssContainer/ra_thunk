@@ -1,11 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
-import {
-  changeModalState,
-  fetchRemoveService,
-  fillEditForm,
-} from '../../actions/actionCreators';
+import { fetchRemoveService, fetchService } from '../../actions/actionCreators';
 
 export const ServiceList = ({ services }) => {
   return (
@@ -19,14 +16,15 @@ export const ServiceList = ({ services }) => {
 
 const ServiceItem = ({ name, price, id }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onRemove = () => {
     fetchRemoveService(dispatch, id);
   };
 
   const onEdit = () => {
-    dispatch(fillEditForm({ name, price, id }));
-    dispatch(changeModalState(true));
+    fetchService(dispatch, id);
+    history.push('/services');
   };
 
   return (
