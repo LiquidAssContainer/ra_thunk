@@ -24,7 +24,7 @@ export const EditServiceModal = ({ match }) => {
   );
 };
 
-export const Modal = ({ children, isOpen, match }) => {
+export const Modal = ({ children, isOpen }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const ref = useRef();

@@ -27,12 +27,12 @@ export const removeService = (id) => {
   return { type: REMOVE_SERVICE, payload: { id } };
 };
 
-export const getService = ({ id, name, price, content }) => {
-  return { type: GET_SERVICE, payload: { id, name, price, content } };
+export const getService = (item) => {
+  return { type: GET_SERVICE, payload: item };
 };
 
-export const editService = ({ id, name, price, content }) => {
-  return { type: EDIT_SERVICE, payload: { id, name, price, content } };
+export const editService = (item) => {
+  return { type: EDIT_SERVICE, payload: item };
 };
 
 export const changeAddServiceField = (name, value) => {
@@ -91,10 +91,10 @@ export const editServiceFailure = (error) => {
   return { type: EDIT_SERVICE_FAILURE, payload: { error } };
 };
 
-export const fetchService = async (dispatch, id) => {
+export const fetchFullService = async (dispatch, id) => {
   try {
     const data = await getResponse({
-      url: `${process.env.REACT_APP_SERVICES}/${id}`,
+      url: `${process.env.REACT_APP_API_SERVICES}/${id}`,
     });
     dispatch(getService(data));
     dispatch(fillEditForm(data));
@@ -106,7 +106,7 @@ export const fetchService = async (dispatch, id) => {
 export const fetchServices = async (dispatch) => {
   dispatch(fetchServicesRequest());
   try {
-    const data = await getResponse({ url: process.env.REACT_APP_SERVICES });
+    const data = await getResponse({ url: process.env.REACT_APP_API_SERVICES });
     dispatch(fetchServicesSuccess(data));
   } catch (e) {
     console.log(e.message);
@@ -118,15 +118,14 @@ export const fetchAddService = async (dispatch, item, history) => {
   dispatch(addServiceRequest());
   try {
     const data = await getResponse({
-      url: process.env.REACT_APP_SERVICES,
+      url: process.env.REACT_APP_API_SERVICES,
       method: 'POST',
       data: item,
     });
     dispatch(addServiceSuccess());
     dispatch(addService(data));
     dispatch(resetEditForm());
-    history.push('/services');
-    dispatch(changeModalState(false));
+    history.push(process.env.REACT_APP_HOMEPAGE);
   } catch (e) {
     dispatch(addServiceFailure(e.message));
   }
@@ -136,22 +135,21 @@ export const fetchEditService = async (dispatch, item, history) => {
   dispatch(editServiceRequest());
   try {
     const data = await getResponse({
-      url: `${process.env.REACT_APP_SERVICES}/${item.id}`,
+      url: `${process.env.REACT_APP_API_SERVICES}/${item.id}`,
       method: 'PUT',
       data: item,
     });
     dispatch(editServiceSuccess());
     dispatch(editService(data));
     dispatch(resetEditForm());
-    history.push('/services');
-    dispatch(changeModalState(false));
+    history.push(process.env.REACT_APP_HOMEPAGE);
   } catch (e) {
     dispatch(editServiceFailure(e.message));
   }
 };
 
 export const fetchRemoveService = async (dispatch, id) => {
-  const response = await fetch(`${process.env.REACT_APP_SERVICES}/${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_API_SERVICES}/${id}`, {
     method: 'DELETE',
   });
   if (response.ok) {
