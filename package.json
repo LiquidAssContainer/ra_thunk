@@ -1,5 +1,5 @@
 {
-  "name": "ra_redux",
+  "name": "ra_thunk",
   "version": "0.9.0",
   "homepage": "./",
   "private": true,
