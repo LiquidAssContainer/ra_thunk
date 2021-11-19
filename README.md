@@ -1,8 +1,8 @@
 # Redux Thunk
 
-[Heroku](https://ra-thunk-backend.herokuapp.com).
-
 [GitHub Pages](https://liquidasscontainer.github.io/ra_thunk).
+
+[Heroku](https://ra-thunk-backend.herokuapp.com).
 
 По части лоадера и отображения ошибки — функционал есть, но работает он, вероятно, не во всех аспектах хорошо. Чтобы наткнуться на ошибку, достаточно в форме добавления написать цену, которая меньше 10. Лоадер (при загрузке страницы, отправке формы) виден в течение примерно 1-й секунды.
 
